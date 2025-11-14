@@ -96,27 +96,40 @@ closeCartBtn.onclick = () => cartModal.style.display = "none";
 window.onclick = (e) => { if(e.target == cartModal) cartModal.style.display = "none"; }
 
 function displayCartItems() {
-    cartItemsDiv.innerHTML = "";
+    let cartHTML = "";
     let total = 0;
 
     cart.forEach((item, idx) => {
         total += item.price;
-        const div = document.createElement("div");
-        div.classList.add("cart-item");
-        div.innerHTML = `
-            <img src="${item.image}" alt="${item.name}">
-            <div>
-                <h4>${item.name}</h4>
-                <p>₱${item.price}</p>
-                <p>Color: ${item.color}</p>
+
+        cartHTML += `
+        <div class="cart-item">
+            <div class="cart-info">
+                <img src="${item.image}" alt="${item.name}">
+                <div>
+                    <h4>${item.name}</h4>
+                    <p>₱${item.price}</p>
+                    <p>Color: ${item.color}</p>
+                </div>
             </div>
+            <button class="removeBtn" data-index="${idx}">Remove</button>
+        </div>
         `;
-        cartItemsDiv.appendChild(div);
     });
 
+    cartItemsDiv.innerHTML = cartHTML;
     cartTotal.textContent = `Total: ₱${total}`;
-    
+    document.getElementById("cartNote").textContent = `You have ${cart.length} item(s) in your cart.`;
 
+    // Attach remove functionality to all remove buttons
+    document.querySelectorAll(".removeBtn").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const index = btn.getAttribute("data-index");
+            cart.splice(index, 1);       // Remove item from cart
+            updateCartCount();           // Update cart count
+            displayCartItems();          // Refresh cart display
+        });
+    });
 }
 
 // ----- Initial Display -----
