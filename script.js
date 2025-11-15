@@ -132,5 +132,14 @@ function displayCartItems() {
     });
 }
 
-// ----- Initial Display -----
+// Close product zoom when clicking outside the modal box
+window.addEventListener("click", function(event) {
+    let modal = document.getElementById("productModal");
+    let modalContent = document.querySelector("#productModal .modal-content");
+
+    // If the modal is open AND the click was outside the content box → close modal
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+});
 displayProducts(products);

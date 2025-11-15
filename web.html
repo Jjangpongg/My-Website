@@ -8,14 +8,17 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-    <header>
+
+    <!-- HEADER -->
+    <header class="block">
         <h1>My Sample Store</h1>
         <div id="cartIcon" style="cursor:pointer; position:absolute; top:20px; right:20px;">
             🛒 Cart (<span id="cartCount">0</span>)
         </div>
     </header>
 
-    <section class="filters">
+    <!-- FILTERS -->
+    <section class="filters block">
         <label for="colorFilter">Filter by Color:</label>
         <select id="colorFilter">
             <option value="all">All</option>
@@ -32,12 +35,13 @@
         </select>
     </section>
 
-    <section id="productList" class="products">
+    <!-- PRODUCT LIST -->
+    <section id="productList" class="products block">
         <!-- Products appear here -->
     </section>
 
-    <!-- Product Zoom Modal -->
-    <div id="productModal" class="modal">
+    <!-- PRODUCT ZOOM MODAL -->
+    <div id="productModal" class="modal block">
       <span class="close">&times;</span>
       <div class="modal-content">
         <img id="modalMainImage" src="" alt="">
@@ -49,8 +53,8 @@
       </div>
     </div>
 
-    <!-- Cart Modal -->
-    <div id="cartModal" class="modal">
+    <!-- CART MODAL -->
+    <div id="cartModal" class="modal block">
       <span class="closeCart">&times;</span>
       <div class="modal-content" style="width:50%;">
         <h2>Shopping Cart</h2>
@@ -59,5 +63,12 @@
         <p id="cartNote">inquire with 092830745 or sample@gmail.com</p>
       </div>
     </div>
+
+    <div id="productModal" class="modal">
+      <span class="close">&times;</span>
+      <div class="modal-content">
+    ...
+    </div>
+</div>
 </body>
 </html>

@@ -6,7 +6,7 @@ const products = [
         image: "images/sample1.jpg",
         gallery: [
             "images/sample1.jpg",
-            "images/sample2.jpg",
+            "images/sample2.jpg", 
             "images/sample3.jpg"
         ]
     },
@@ -29,5 +29,6 @@ const products = [
             "images/black-shoes.jpg",
             "images/black-shoes-2.jpg"
         ]
-    }
+    },
+
 ];
