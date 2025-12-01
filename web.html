@@ -37,13 +37,12 @@
 
     <!-- PRODUCT LIST -->
     <section id="productList" class="products block">
-        <!-- Products appear here -->
     </section>
 
-    <!-- PRODUCT ZOOM MODAL -->
+    <!-- PRODUCT ZOOM MODAL (FIXED) -->
     <div id="productModal" class="modal block">
-      <span class="close">&times;</span>
       <div class="modal-content">
+        <span class="close productClose">&times;</span>
         <img id="modalMainImage" src="" alt="">
         <div id="modalGallery" class="gallery"></div>
         <h3 id="modalName"></h3>
@@ -55,20 +54,15 @@
 
     <!-- CART MODAL -->
     <div id="cartModal" class="modal block">
-      <span class="closeCart">&times;</span>
-      <div class="modal-content" style="width:50%;">
-        <h2>Shopping Cart</h2>
-        <div id="cartItems"></div>
-        <p id="cartTotal"></p>
-        <p id="cartNote">inquire with 092830745 or sample@gmail.com</p>
-      </div>
-    </div>
-
-    <div id="productModal" class="modal">
-      <span class="close">&times;</span>
-      <div class="modal-content">
-    ...
-    </div>
+  <div class="modal-content" style="width:50%;">
+    <span class="closeCart">&times;</span>
+    <h2>Shopping Cart</h2>
+    <div id="cartItems"></div>
+    <p id="cartTotal"></p>
+    <p id="cartNote">You have 0 item(s) in your cart.</p>
+    <p id="cartContact">inquire with 092830745 or sample@gmail.com</p>
+  </div>
 </div>
+
 </body>
 </html>

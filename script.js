@@ -25,49 +25,50 @@ const modalGallery = document.getElementById("modalGallery");
 const modalName = document.getElementById("modalName");
 const modalPrice = document.getElementById("modalPrice");
 const modalColor = document.getElementById("modalColor");
-const closeBtn = document.querySelector(".close");
+const closeProductBtn = document.querySelector(".productClose");
 const addToCartBtn = document.getElementById("addToCartBtn");
 
 function openModal(index) {
     currentProduct = products[index];
     modal.style.display = "block";
+
     modalMainImage.src = currentProduct.image;
     modalName.textContent = currentProduct.name;
     modalPrice.textContent = `₱${currentProduct.price}`;
     modalColor.textContent = `Color: ${currentProduct.color}`;
 
-    // Gallery
     modalGallery.innerHTML = "";
-    if(currentProduct.gallery && currentProduct.gallery.length > 0){
-        currentProduct.gallery.forEach(img => {
-            const imgElem = document.createElement("img");
-            imgElem.src = img;
-            imgElem.onclick = () => modalMainImage.src = img;
-            modalGallery.appendChild(imgElem);
-        });
-    }
+    currentProduct.gallery.forEach(img => {
+        const imgElem = document.createElement("img");
+        imgElem.src = img;
+        imgElem.onclick = () => modalMainImage.src = img;
+        modalGallery.appendChild(imgElem);
+    });
 }
 
 // Close modal
-closeBtn.onclick = () => modal.style.display = "none";
-window.onclick = (e) => { if(e.target == modal) modal.style.display = "none"; }
+closeProductBtn.onclick = () => modal.style.display = "none";
+
 
 // ----- Filtering & Sorting -----
 function filterAndSort() {
     let filtered = [...products];
 
     const selectedColor = document.getElementById("colorFilter").value;
-    if (selectedColor !== "all") filtered = filtered.filter(item => item.color === selectedColor);
+    if (selectedColor !== "all") {
+        filtered = filtered.filter(item => item.color === selectedColor);
+    }
 
     const sortType = document.getElementById("sort").value;
     if (sortType === "low-high") filtered.sort((a,b) => a.price - b.price);
-    else if (sortType === "high-low") filtered.sort((a,b) => b.price - a.price);
+    if (sortType === "high-low") filtered.sort((a,b) => b.price - a.price);
 
     displayProducts(filtered);
 }
 
 document.getElementById("colorFilter").addEventListener("change", filterAndSort);
 document.getElementById("sort").addEventListener("change", filterAndSort);
+
 
 // ----- Add to Cart -----
 addToCartBtn.onclick = () => {
@@ -79,6 +80,7 @@ addToCartBtn.onclick = () => {
 function updateCartCount() {
     document.getElementById("cartCount").textContent = cart.length;
 }
+
 
 // ----- Cart Modal -----
 const cartModal = document.getElementById("cartModal");
@@ -93,7 +95,7 @@ cartIcon.onclick = () => {
 };
 
 closeCartBtn.onclick = () => cartModal.style.display = "none";
-window.onclick = (e) => { if(e.target == cartModal) cartModal.style.display = "none"; }
+
 
 function displayCartItems() {
     let cartHTML = "";
@@ -121,25 +123,24 @@ function displayCartItems() {
     cartTotal.textContent = `Total: ₱${total}`;
     document.getElementById("cartNote").textContent = `You have ${cart.length} item(s) in your cart.`;
 
-    // Attach remove functionality to all remove buttons
+    // Remove buttons
     document.querySelectorAll(".removeBtn").forEach(btn => {
         btn.addEventListener("click", () => {
             const index = btn.getAttribute("data-index");
-            cart.splice(index, 1);       // Remove item from cart
-            updateCartCount();           // Update cart count
-            displayCartItems();          // Refresh cart display
+            cart.splice(index, 1);
+            updateCartCount();
+            displayCartItems();
         });
     });
 }
 
-// Close product zoom when clicking outside the modal box
-window.addEventListener("click", function(event) {
-    let modal = document.getElementById("productModal");
-    let modalContent = document.querySelector("#productModal .modal-content");
 
-    // If the modal is open AND the click was outside the content box → close modal
-    if (event.target === modal) {
-        modal.style.display = "none";
-    }
+// ----- Global modal close (click outside) -----
+window.addEventListener("click", (e) => {
+    if (e.target === modal) modal.style.display = "none";
+    if (e.target === cartModal) cartModal.style.display = "none";
 });
+
+
+// Initialize
 displayProducts(products);
